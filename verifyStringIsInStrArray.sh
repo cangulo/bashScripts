@@ -1,9 +1,5 @@
 #!/bin/bash
 # Bash Script to verify is an string is in the list of string of an array
-# Remarks: to declare an output as array follow the next pattern:
-#       arrayName=( CommandWithOutput)  => 
-#       1. Note the parenthesis before and after the command
-#       2. The CommandWithOutput should return the array objects separated by \n
 
 array=( "test" "test2" "test3" )
 inputValue="test25"
