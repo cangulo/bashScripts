@@ -29,9 +29,19 @@
 
 **Description**: Example of how to detect if an string is contained in a array of string
 
-# Author Info
+## About me
 
-* LinkedIn   - [Carlos Angulo Mascarell](https://www.linkedin.com/in/angulomascarell)
-* Twitter   - [@AnguloMascarell](https://twitter.com/angulomascarell)
+I'm a software engineer with experience in .NET Framework, .NET Core and Angular, I love challenges, learning and share knowledge. Feel free to contact me via LinkedIn.
 
-[Back To The Top](#read-me-template)
+<p align="center">
+    <img src="https://media-exp1.licdn.com/dms/image/C5612AQFBFdJt_exE8Q/article-inline_image-shrink_1000_1488/0?e=1590624000&v=beta&t=l3VTNfq9iN0bCFuXh_2bQr1xrd06yZoFGkm1w3DWRDQ">
+</p>
+
+*Per aspera ad astra.*
+
+LinkedIn   - [Carlos Angulo Mascarell](https://www.linkedin.com/in/angulomascarell) \
+Twitter   - [@AnguloMascarell](https://twitter.com/angulomascarell)
+
+<p align="right">
+  <a href="#">Come back to the top</a>
+</p>
