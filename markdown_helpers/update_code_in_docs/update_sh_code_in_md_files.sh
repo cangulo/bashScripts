@@ -55,6 +55,7 @@ if [[ ${#md_files[@]} -eq 0 ]]; then
     echo -e "\n###      There are no markdown files"
 else
     for md_file_path in ${md_files[@]}; do
+        echo "Markdown file found" $(basename $md_file_path)
         match_start_line=$(awk '/CODE_START/{print NR;exit}' $md_file_path)
         cd $(dirname $md_file_path)
         while string_is_not_empty $match_start_line; do
