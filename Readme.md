@@ -29,6 +29,7 @@
 
 **Description**: Example of how to detect if an string is contained in a array of string
 
+
 ## About me
 
 I'm a software engineer with experience in .NET Framework, .NET Core and Angular, I love challenges, learning and share knowledge. Feel free to contact me via LinkedIn.
