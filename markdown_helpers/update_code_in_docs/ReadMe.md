@@ -3,18 +3,28 @@
 This files contains the next traces to define an area where the code is going to be updated with the content of the file referenced 
 ```html
 <!-- CODE_START [FILE_PATH] -->
-<!-- CODE_END --> -->
+<!-- CODE_END -->
 ```
 # Code to be updated
 
 [code_bash_1.sh](./resources/code_bash_1.sh)
 
 <!-- CODE_START /home/carlos/Documents/github_repositories/bashScripts/markdown_helpers/update_code_in_docs/resources/code_bash_1.sh -->
+```bash
+#!/bin/bash
+
+echo "hola from the file 1"
+```
 <!-- CODE_END -->
 
 [code_bash_2.sh](./resources/code_bash_2.sh)
 
-<!-- CODE_START update_code_in_docs/resources/code_bash_2.sh -->
+<!-- CODE_START /home/carlos/Documents/github_repositories/bashScripts/markdown_helpers/update_code_in_docs/resources/code_bash_2.sh -->
+```bash
+#!/bin/bash
+
+echo "hola from the file 2"
+```
 <!-- CODE_END -->
 
 # About me

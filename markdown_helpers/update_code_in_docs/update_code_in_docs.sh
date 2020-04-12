@@ -5,11 +5,45 @@
 #   CODE_START:[CODE_END]
 
 ## Functions
-verify_path_is_valid() {
+path_is_valid() {
     if [ -f "$1" ]; then
         return 0
     fi
     return 1
+}
+string_is_not_empty() {
+    if [ -z "$1" ]; then
+        return 1
+    fi
+    return 0
+}
+remove_code_between_two_lines() {
+    diff_lines=$(expr $2 - $1)
+    if [[ "$diff_lines" > 1 ]]; then
+        init_range=$(expr $1 + 1)
+        end_range=$(expr $2 - 1)
+        path=$3
+        sed -i "$init_range,$end_range""d" $path
+    fi
+}
+insert_code() {
+    # $1 Init Line To Insert Code
+    # $2 Code Path
+    # $3 Mardown File PAth
+    lines_before_code=$(expr $1)
+    num_lines=$(cat $3 | wc -l)
+    lines_after_code=$(expr $num_lines - $lines_before_code + 1)
+
+    # Append the upper part
+    head -n $lines_before_code $3 >temp.txt
+
+    # Append the code
+    echo "\`\`\`bash" >>temp.txt
+    cat $2 >>temp.txt
+    echo "\`\`\`" >>temp.txt
+
+    tail -n $lines_after_code $3 >>temp.txt
+    mv temp.txt $3
 }
 
 ## Main Code
@@ -18,17 +52,20 @@ md_files=$(find $(pwd) -type f -name "*.md")
 if [[ ${#md_files[@]} -eq 0 ]]; then
     echo -e "\n###      There are no markdown files"
 else
-    for file_path in ${md_files[@]}; do
-        # echo $file_path
-        start_code_lines=$(awk '/CODE_START/{print NR}' $file_path)
-        for start_code_line in ${start_code_lines[@]}; do
-            file_with_code_path=$(awk -v line_with_file_path="$start_code_line" 'NR == line_with_file_path && NF == 4{print $3}' $file_path)
+    for md_file_path in ${md_files[@]}; do
+        match_start_line=$(awk '/CODE_START/{print NR;exit}' $md_file_path)
+        while string_is_not_empty $match_start_line; do
 
-            if verify_path_is_valid $file_with_code_path; then
-                end_code_line=$(awk -v line_to_start_cheking="$start_code_line" 'NR>line_to_start_cheking && /CODE_END/ {print NR;exit}' $file_path)
-                echo $end_code_line
+            file_with_code_path=$(awk -v line_with_md_file_path="$match_start_line" 'NR == line_with_md_file_path && NF == 4{print $3}' $md_file_path)
+
+            if path_is_valid $file_with_code_path; then
+                match_end_line=$(awk -v line_to_start_cheking="$match_start_line" 'NR > line_to_start_cheking && /CODE_END/ {print NR;exit}' $md_file_path)
+                if string_is_not_empty $match_end_line; then
+                    remove_code_between_two_lines $match_start_line $match_end_line $md_file_path
+                    insert_code $match_start_line $file_with_code_path $md_file_path
+                fi
             fi
-
+            match_start_line=$(awk -v last_line=$match_start_line 'NR > last_line && /CODE_START/ {print NR;exit}' $md_file_path)
         done
     done
 fi
