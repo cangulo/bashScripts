@@ -38,6 +38,8 @@ function insert_code() {
     # Append the upper part
     head -n $lines_before_code $3 >temp.txt
 
+    # TODO: detect if the first and last lines of of the code to be insert is empty
+    # Scenario 1: If the text to be inserted doesn't have a \n at the end this works bad
     # Append the code
     echo "\`\`\`$4" >>temp.txt
     cat $2 >>temp.txt
