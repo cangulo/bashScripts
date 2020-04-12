@@ -52,7 +52,7 @@ md_files=$(find $(pwd) -type f -name "*.md")
 init_execution_path=$(pwd)
 
 if [[ ${#md_files[@]} -eq 0 ]]; then
-    echo -e "\n###      There are no markdown files"
+    echo "###      There are no markdown files"
 else
     for md_file_path in ${md_files[@]}; do
         match_start_line=$(awk '/CODE_START/{print NR;exit}' $md_file_path)
