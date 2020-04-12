@@ -50,7 +50,7 @@ function insert_code() {
 ## Main Code
 md_files=$(find $(pwd) -type f -name "*.md")
 init_execution_path=$(pwd)
-echo "###   START   update_sh_code_in_md_files.sh "
+echo "###   START   update_sh_code_in_md_files.sh"
 
 if [[ ${#md_files[@]} -eq 0 ]]; then
     echo "###      There are no markdown files"
