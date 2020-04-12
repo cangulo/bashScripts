@@ -55,7 +55,6 @@ if [[ ${#md_files[@]} -eq 0 ]]; then
     echo -e "\n###      There are no markdown files"
 else
     for md_file_path in ${md_files[@]}; do
-        echo "Markdown file found" $(basename $md_file_path)
         match_start_line=$(awk '/CODE_START/{print NR;exit}' $md_file_path)
         cd $(dirname $md_file_path)
         while string_is_not_empty $match_start_line; do
@@ -65,6 +64,8 @@ else
             lang=$(awk -v line_with_md_file_path="$match_start_line" 'NR == line_with_md_file_path && NF == 5 {print $4}' $md_file_path)
 
             if path_is_valid $file_with_code_path; then
+                echo "###   Markdown with code found" $(basename $md_file_path)
+                echo "###   Injecting code from the file" $(basename $file_with_code_path)
                 match_end_line=$(awk -v line_to_start_cheking="$match_start_line" 'NR > line_to_start_cheking && /CODE_END/ {print NR;exit}' $md_file_path)
                 if string_is_not_empty $match_end_line; then
                     remove_code_between_two_lines $match_start_line $match_end_line $md_file_path
