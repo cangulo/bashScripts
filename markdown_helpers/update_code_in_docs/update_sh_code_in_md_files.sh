@@ -1,5 +1,5 @@
 #!/bin/bash
-#   Update all the code references in the .md files
+#   Update all the bash code references in the .md files
 #   Markdown files should use the tag CODE_START and CODE_END as next
 #   CODE_START:[CODE_PATH]
 #   CODE_START:[CODE_END]
@@ -56,7 +56,7 @@ if [[ ${#md_files[@]} -eq 0 ]]; then
 else
     for md_file_path in ${md_files[@]}; do
         match_start_line=$(awk '/CODE_START/{print NR;exit}' $md_file_path)
-        cd $md_file_path
+        cd $(dirname $md_file_path)
         while string_is_not_empty $match_start_line; do
 
             # Improve get parameters process

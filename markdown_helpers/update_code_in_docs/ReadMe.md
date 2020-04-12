@@ -18,11 +18,21 @@ This files contains the next traces to define an area where the code is going to
 [code_bash_1.sh](./resources/code_bash_1.sh)
 
 <!-- CODE_START ./resources/code_bash_1.sh bash -->
+```bash
+#!/bin/bash
+
+echo "hola from the file 1"
+```
 <!-- CODE_END -->
 
 [code_bash_2.sh](./resources/code_bash_2.sh)
 
 <!-- CODE_START ./resources/code_bash_2.sh bash -->
+```bash
+#!/bin/bash
+
+echo "hola from the file 2"
+```
 <!-- CODE_END -->
 
 # About me
