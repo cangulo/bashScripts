@@ -5,19 +5,19 @@
 #   CODE_START:[CODE_END]
 
 ## Functions
-path_is_valid() {
+function path_is_valid() {
     if [ -f "$1" ]; then
         return 0
     fi
     return 1
 }
-string_is_not_empty() {
+function string_is_not_empty() {
     if [ -z "$1" ]; then
         return 1
     fi
     return 0
 }
-remove_code_between_two_lines() {
+function remove_code_between_two_lines() {
     diff_lines=$(expr $2 - $1)
     if [[ "$diff_lines" > 1 ]]; then
         init_range=$(expr $1 + 1)
@@ -26,7 +26,7 @@ remove_code_between_two_lines() {
         sed -i "$init_range,$end_range""d" $path
     fi
 }
-insert_code() {
+function insert_code() {
     # $1 Line that contains START_CODE
     # $2 Code Path
     # $3 Mardown File Path
@@ -50,11 +50,13 @@ insert_code() {
 ## Main Code
 md_files=$(find $(pwd) -type f -name "*.md")
 init_execution_path=$(pwd)
+echo "###   START   update_sh_code_in_md_files.sh "
 
 if [[ ${#md_files[@]} -eq 0 ]]; then
     echo "###      There are no markdown files"
 else
     for md_file_path in ${md_files[@]}; do
+        # echo "###   Markdown found $(basename $md_file_path) at $(dirname $md_file_path)"
         match_start_line=$(awk '/CODE_START/{print NR;exit}' $md_file_path)
         cd $(dirname $md_file_path)
         while string_is_not_empty $match_start_line; do
@@ -64,8 +66,8 @@ else
             lang=$(awk -v line_with_md_file_path="$match_start_line" 'NR == line_with_md_file_path && NF == 5 {print $4}' $md_file_path)
 
             if path_is_valid $file_with_code_path; then
-                echo "###   Markdown with code found" $(basename $md_file_path)
-                echo "###   Injecting code from the file" $(basename $file_with_code_path)
+                echo "###   $(basename $md_file_path)"
+                echo "###   Injecting $(basename $file_with_code_path)"
                 match_end_line=$(awk -v line_to_start_cheking="$match_start_line" 'NR > line_to_start_cheking && /CODE_END/ {print NR;exit}' $md_file_path)
                 if string_is_not_empty $match_end_line; then
                     remove_code_between_two_lines $match_start_line $match_end_line $md_file_path
@@ -77,3 +79,4 @@ else
     done
 fi
 cd $init_execution_path
+echo "###   END   update_sh_code_in_md_files.sh "
