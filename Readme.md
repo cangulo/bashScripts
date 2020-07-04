@@ -35,7 +35,7 @@
 I'm a software engineer with experience in .NET Framework, .NET Core and Angular, I love challenges, learning and share knowledge. Feel free to contact me via LinkedIn.
 
 <p align="center">
-    <img src="https://media-exp1.licdn.com/dms/image/C5612AQFBFdJt_exE8Q/article-inline_image-shrink_1000_1488/0?e=1590624000&v=beta&t=l3VTNfq9iN0bCFuXh_2bQr1xrd06yZoFGkm1w3DWRDQ">
+    <img src="resources/profile_picture.png">
 </p>
 
 *Per aspera ad astra.*
